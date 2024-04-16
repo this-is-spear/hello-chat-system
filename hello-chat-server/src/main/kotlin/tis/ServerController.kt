@@ -16,11 +16,10 @@ class ServerController {
     fun channel(message: String): Flux<String> {
         log.info("Received channel request...")
 
-        return LongRange(1, 10).toFlux()
-            .doOnNext { setting: Long ->
-                log.info("Channel frequency setting is {} second(s).", setting)
-            }
-            .doOnCancel { log.warn("The client cancelled the channel.") }
-            .switchMap { setting -> Flux.interval(Duration.ofSeconds(setting)).map { "server sent message $it" } }
+        return LongRange(1, 10)
+            .map { message }
+            .map { "server sent index : $it message : $it" }
+            .toFlux()
+            .delayElements(Duration.ofSeconds(1))
     }
 }
