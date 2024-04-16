@@ -33,6 +33,8 @@ subprojects {
     extra["springCloudVersion"] = "2023.0.1"
 
     dependencies {
+        // https://mvnrepository.com/artifact/io.netty/netty-resolver-dns-native-macos
+        runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.108.Final")
         implementation("org.springframework.boot:spring-boot-starter-actuator")
         implementation("org.springframework.boot:spring-boot-starter-rsocket")
         implementation("io.micrometer:micrometer-tracing-bridge-brave")
