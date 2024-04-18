@@ -1,12 +1,10 @@
 package tis
 
-import org.reactivestreams.Publisher
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.messaging.rsocket.RSocketRequester
 import org.springframework.shell.command.annotation.Command
 import org.springframework.stereotype.Component
-import reactor.core.publisher.Mono
 
 private const val ENTER = "enter"
 private const val SEND = "send"
@@ -21,22 +19,23 @@ class ChatController(
     private val log: Logger = LoggerFactory.getLogger(this::class.java)
 
     @Command(command = [ENTER])
-    fun enterRoom(username: String) {
+    fun enterRoom(channel: String) {
         rSocketRequester
             .route(ENTER_CHANNEL)
-            .data(username)
+            .data(channel)
             .retrieveFlux(String::class.java)
             .subscribe { message -> log.info("Received: $message") }
     }
 
     @Command(command = [SEND])
-    fun send(message: String): Publisher<Void> {
+    fun send(
+        channel: String,
+        message: String,
+    ) {
         rSocketRequester
             .route(SEND_MESSAGE)
-            .data(message)
+            .data("$channel:$message")
             .send()
             .subscribe()
-
-        return Mono.empty()
     }
 }

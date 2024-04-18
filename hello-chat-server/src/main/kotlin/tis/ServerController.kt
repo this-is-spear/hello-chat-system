@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
-private const val CHANNEL = "channel"
 private const val ENTER_CHANNEL = "enter-message"
 private const val SEND_MESSAGE = "send-message"
 
@@ -20,20 +19,22 @@ class ServerController(
     private val log: Logger = LoggerFactory.getLogger(this::class.java)
 
     @MessageMapping(ENTER_CHANNEL)
-    fun channel(name: String): Flux<String> {
+    fun channel(channel: String): Flux<String> {
         log.info("Received channel request...")
-        log.info("enter $name")
+        log.info("connect $channel")
         return redisTemplate
-            .listenTo(ChannelTopic.of(CHANNEL))
+            .listenTo(ChannelTopic.of(channel))
             .map { it.message }
     }
 
     @MessageMapping(SEND_MESSAGE)
     fun send(message: String): Mono<Void> {
         log.info("send message. message : $message")
-        redisTemplate
-            .convertAndSend(CHANNEL, message)
-            .then().subscribe()
-        return Mono.empty()
+        val channel = message.split(":")[0]
+        val content = message.split(":")[1]
+
+        return redisTemplate
+            .convertAndSend(channel, content)
+            .then()
     }
 }
