@@ -28,10 +28,10 @@ class ServerController(
     }
 
     @MessageMapping(SEND_MESSAGE)
-    fun send(message: String): Mono<Void> {
+    fun send(message: Message): Mono<Void> {
         log.info("send message. message : $message")
-        val channel = message.split(":")[0]
-        val content = message.split(":")[1]
+        val channel = message.channel
+        val content = message.content
 
         return redisTemplate
             .convertAndSend(channel, content)

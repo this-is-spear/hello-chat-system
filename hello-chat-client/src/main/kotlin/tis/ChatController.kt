@@ -34,7 +34,7 @@ class ChatController(
     ) {
         rSocketRequester
             .route(SEND_MESSAGE)
-            .data("$channel:$message")
+            .data(Message(channel, message))
             .send()
             .subscribe()
     }
