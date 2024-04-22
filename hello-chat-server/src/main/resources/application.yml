@@ -5,6 +5,9 @@ spring:
     server:
       port: 7000
       address: localhost
+      transport: tcp
+#      transport: websocket
+#      mapping-path: /ws
   data:
     redis:
       host: localhost
