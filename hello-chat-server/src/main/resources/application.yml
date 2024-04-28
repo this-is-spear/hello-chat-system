@@ -1,3 +1,5 @@
+
+
 spring:
   main:
     lazy-initialization: true
@@ -16,3 +18,18 @@ spring:
 logging:
   level:
     io.rsocket: DEBUG
+
+management:
+  metrics:
+    export:
+      prometheus:
+        rsocket:
+          host: localhost
+          port: 7000
+          max-retries: 1000
+          first-backoff: 10s
+          max-backoff: 10m
+          transport: tcp
+server:
+  compression:
+    enabled: true

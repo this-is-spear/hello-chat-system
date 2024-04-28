@@ -35,11 +35,8 @@ subprojects {
     dependencies {
         // https://mvnrepository.com/artifact/io.netty/netty-resolver-dns-native-macos
         runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.108.Final")
-        implementation("org.springframework.boot:spring-boot-starter-actuator")
         implementation("org.springframework.boot:spring-boot-starter-rsocket")
-        implementation("io.micrometer:micrometer-tracing-bridge-brave")
         implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-        implementation("io.zipkin.reporter2:zipkin-reporter-brave")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
