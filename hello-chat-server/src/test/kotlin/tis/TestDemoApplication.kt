@@ -17,6 +17,3 @@ class TestDemoApplication {
             .withExposedPorts(6379)
 }
 
-fun main(args: Array<String>) {
-    fromApplication<ChatServerApplication>().with(TestDemoApplication::class).run(*args)
-}
