@@ -9,6 +9,6 @@ import org.springframework.context.annotation.Configuration
 class PrometheusConfiguration {
     @Bean
     fun prometheusMeterRegistry(): PrometheusMeterRegistry {
-        return PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+        return PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
     }
 }
