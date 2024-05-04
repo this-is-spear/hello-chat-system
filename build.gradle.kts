@@ -39,6 +39,7 @@ subprojects {
         if (osdetector.classifier == "osx-aarch_64") {
             runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.77.Final:${osdetector.classifier}")
         }
+        implementation("io.micrometer.prometheus:prometheus-rsocket-spring:1.5.3")
         implementation("org.springframework.boot:spring-boot-starter-rsocket")
         implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
