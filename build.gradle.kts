@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "3.2.4"
     id("io.spring.dependency-management") version "1.1.4"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
+    id("com.google.osdetector") version "1.7.1"
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
 }
@@ -21,6 +22,7 @@ subprojects {
         plugin("org.jetbrains.kotlin.jvm")
         plugin("org.jetbrains.kotlin.plugin.spring")
         plugin("org.jlleitschuh.gradle.ktlint")
+        plugin("com.google.osdetector")
     }
 
     group = "tis"
@@ -34,7 +36,9 @@ subprojects {
 
     dependencies {
         // https://mvnrepository.com/artifact/io.netty/netty-resolver-dns-native-macos
-        runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.108.Final")
+        if (osdetector.classifier == "osx-aarch_64") {
+            runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.77.Final:${osdetector.classifier}")
+        }
         implementation("org.springframework.boot:spring-boot-starter-rsocket")
         implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
