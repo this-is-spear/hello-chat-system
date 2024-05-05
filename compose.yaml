@@ -15,6 +15,3 @@ services:
       - '3000:3000'
     depends_on:
       - prometheus
-    volumes:
-      - ./dockerfiles/grafana-datasource.yml:/etc/grafana/provisioning/datasources/grafana-datasource.yml
-      - ./dockerfiles/grafana-dashboard.yml:/etc/grafana/provisioning/dashboards/grafana-dashboard.yml

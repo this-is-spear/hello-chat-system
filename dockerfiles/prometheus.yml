@@ -3,25 +3,9 @@ global:
 
 scrape_configs:
   - job_name: 'prometheus'
-
+    metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['host.docker.internal:9090']
-
-  - job_name: 'local-rsocket-proxy-connected'
-
-    scrape_interval: 10s
-    scrape_timeout: 9s
-    metrics_path: '/metrics/connected'
-    static_configs:
-      - targets: ['host.docker.internal:8080']
-
-  - job_name: 'localhost'
-
-    scrape_interval: 10s
-    scrape_timeout: 2s
-    metrics_path: '/metrics/proxy'
-    static_configs:
-      - targets: ['host.docker.internal:8080']
+      - targets: ['host.docker.internal:8080', 'host.docker.internal:8081']
 
 rule_files:
   - prometheus_rules.yml

@@ -1,8 +1,0 @@
-apiVersion: 1
-
-datasources:
-  - name: prometheus
-    type: prometheus
-    access: direct
-    url: http://host.docker.internal:9090
-    isDefault: true
