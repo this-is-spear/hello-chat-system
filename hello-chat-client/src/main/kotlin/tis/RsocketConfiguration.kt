@@ -30,7 +30,7 @@ class RsocketConfiguration {
                     .build(),
             )
             .dataMimeType(MimeTypeUtils.APPLICATION_JSON)
-            .tcp("localhost", 7000)
+            .tcp("127.0.0.1", 7000)
 //            .websocket(URI.create("http://localhost:7000/ws"))
     }
 }
