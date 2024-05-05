@@ -4,7 +4,7 @@ spring:
   rsocket:
     server:
       port: 7000
-      address: localhost
+      address: 127.0.0.1
       transport: tcp
 #      transport: websocket
 #      mapping-path: /ws
@@ -18,10 +18,5 @@ logging:
     io.rsocket: DEBUG
 
 server:
-  port: 8080
   compression:
     enabled: true
-
-micrometer:
-  prometheus-proxy:
-    tcp-port: 7000

@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono
 
 private const val ENTER_CHANNEL = "enter-message"
 private const val SEND_MESSAGE = "send-message"
+private const val KEEP_MESSAGE = "keep-message"
 
 @Controller
 class ServerController(
@@ -36,5 +37,14 @@ class ServerController(
         return redisTemplate
             .convertAndSend(channel, content)
             .then()
+    }
+
+    @MessageMapping(KEEP_MESSAGE)
+    fun sendKeepGoing(messages: Flux<Message>): Flux<Long> {
+        return messages.log()
+            .flatMap {
+                log.info("send message. message : $it")
+                redisTemplate.convertAndSend(it.channel, it.content)
+            }
     }
 }

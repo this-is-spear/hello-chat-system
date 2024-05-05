@@ -1,12 +1,2 @@
 server:
   port: 8081
-
-management:
-  metrics:
-    export:
-      prometheus:
-        rsocket:
-          enabled: true
-          host: 127.0.0.1
-          port: 7000
-          transport: tcp
